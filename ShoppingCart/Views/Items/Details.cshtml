@@ -1,0 +1,30 @@
+﻿@model ShoppingCart.Models.Item
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Item Details";
+}
+
+<h2>@Model.Name</h2>
+
+<div class="card mb-4 box-shadow">
+    <div class="card-body">
+        <p><strong>Price:</strong> $@Model.Price</p>
+        <p><strong>Description:</strong> @Model.Description</p>
+        <p><strong>Category:</strong> @Model.Category</p>
+        <p><strong>Quantity:</strong> @Model.Quantity</p>
+
+        <!-- Purchase button only for signed-in users -->
+        @if (SignInManager.IsSignedIn(User) && Model.Quantity > 0)
+        {
+            <a asp-action="Add" asp-controller="Cart" asp-route-id="@Model.Id" class="btn btn-success">Add to Cart</a>
+        }
+        else
+        {
+            <button class="btn btn-secondary" disabled>Out of Stock</button>
+        }
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-primary">Back to List</a>

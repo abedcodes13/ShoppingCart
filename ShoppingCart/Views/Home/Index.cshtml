@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model ApplicationUser
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Home";
+    var currentUser = UserManager.GetUserAsync(User).Result;
+}
+
+<div class="container">
+    <header class="mb-4">
+        <h1>Welcome to the Sales Board</h1>
+        <p>Put up items for sale, purchase items, and manage your listings easily.</p>
+    </header>
+
+    @if (SignInManager.IsSignedIn(User) && currentUser != null)
+    {
+        <div class="user-details">
+            <h4>Logged in as: @currentUser.Name</h4>
+            <p>Email: @currentUser.Email</p>
+            <a asp-page="/Account/Logout" class="btn btn-danger">Logout</a>
+        </div>
+    }
+    else
+    {
+        <div class="auth-buttons">
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">Login</a>
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-secondary">Register</a>
+        </div>
+    }
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Selling?</h4>
+                    <p class="card-text">Manage your items and view your customers' details.</p>
+                    <a asp-controller="Items" asp-action="UserHomePage" class="btn btn-success">Go to Seller Dashboard</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Buying?</h4>
+                    <p class="card-text">Browse and search all items available for purchase.</p>
+                    <a asp-controller="Items" asp-action="Index" class="btn btn-info">Browse Items</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

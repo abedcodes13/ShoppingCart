@@ -1,0 +1,49 @@
+﻿@model List<ShoppingCart.Models.CartItem>
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+
+<h2>Shopping Cart</h2>
+@if (!Model.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Item.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Item.Price.ToString("C")</td>
+                    <td>@item.TotalPrice.ToString("C")</td>
+
+                    <td>
+                        <a asp-action="Minus" asp-route-id="@item.Item.Id">-</a>
+                        <a asp-action="Add" asp-route-id="@item.Item.Id">+</a>
+                        <a asp-action="Remove" asp-route-id="@item.Item.Id">Remove</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Total Cost:</td>
+                <td>@ViewBag.totalcost.ToString("C")</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    <a asp-action="Checkout" class="btn btn-primary">Checkout</a>
+}

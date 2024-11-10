@@ -1,0 +1,132 @@
+﻿/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navbar customization */
+.navbar {
+    background-color: #007bff; /* Change the background of the navbar */
+    border-bottom: 2px solid #0056b3; /* Add a darker bottom border */
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+    .navbar .navbar-text {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: royalblue;
+        font-weight: bold;
+
+
+
+    }
+    .navbar .navbar-brand, .navbar .nav-link {
+        color: black !important; /* White text for navbar links */
+        font-weight: bold;
+    }
+
+        .navbar .nav-link:hover {
+            color: red !important; /* Lighter shade on hover */
+        }
+
+/* Footer styling */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+    footer a {
+        color: #007bff;
+    }
+
+        footer a:hover {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+/* Main content customization */
+.container {
+    max-width: 1140px;
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+footer .container {
+    color: #007bff;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+/* Button customization */
+button, .btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+    button:hover, .btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Delete button */
+    button.delete-btn, .btn.delete-btn {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+        button.delete-btn:hover, .btn.delete-btn:hover {
+            background-color: #c82333;
+        }
+
+    /* Create button */
+    button.create-btn, .btn.create-btn {
+        background-color: #28a745;
+        color: #fff;
+    }
+
+        button.create-btn:hover, .btn.create-btn:hover {
+            background-color: #218838;
+        }
+
+/* Form field styles */
+input, textarea {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+    input:focus, textarea:focus {
+        border-color: #007bff;
+        outline: none;
+    }

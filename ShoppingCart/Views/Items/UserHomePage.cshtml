@@ -1,0 +1,55 @@
+﻿<!-- Create a new View: UserHomePage.cshtml -->
+@model ShoppingCart.Models.UserHomePageViewModel
+
+@{
+    ViewData["Title"] = "My Products";
+}
+
+<p>
+    <a asp-action="Create" class="btn create-btn">Create New</a>
+</p>
+
+<h2>Items for Sale</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ItemsForSale)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Quantity</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Customers and Total Spent</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Total Spent</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.CustomersReport)
+        {
+            <tr>
+                <td>@customer.CustomerName</td>
+                <td>@customer.TotalSpent</td>
+            </tr>
+        }
+    </tbody>
+</table>

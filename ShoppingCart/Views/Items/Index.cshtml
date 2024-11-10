@@ -1,0 +1,65 @@
+﻿@model ShoppingCart.Models.ItemSearchView
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "All Items";
+}
+
+<h1>Available Items for Sale</h1>
+@if (!SignInManager.IsSignedIn(User))
+{
+    <p><strong>Please sign in to purchase items.</strong></p>
+}
+<form asp-controller="Items" asp-action="Index" method="get" class="row">
+    <div class="form-group col-md-4">
+        <label for="Category">Category</label>
+        <select asp-for="Category" class="form-control" asp-items="Model.Categories">
+            <option value="">All Categories</option>
+        </select>
+    </div>
+    <div class="form-group col-md-4">
+        <label for="SearchString">Search by Name</label>
+        <input type="text" asp-for="SearchString" class="form-control" placeholder="Enter item name" value="@Model.SearchString" />
+    </div>
+    <div class="form-group col-md-4 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+
+<div class="row mt-4">
+    @if (Model.Items != null && Model.Items.Any())
+    {
+        @foreach (var item in Model.Items)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                        <p class="card-text"><strong>Price:</strong> @Html.DisplayFor(modelItem => item.Price)</p>
+                        <p class="card-text"><strong>Description:</strong> @Html.DisplayFor(modelItem => item.Description)</p>
+                        <p class="card-text"><strong>Category:</strong> @Html.DisplayFor(modelItem => item.Category)</p>
+                        <p class="card-text"><strong>Quantity:</strong> @Html.DisplayFor(modelItem => item.Quantity)</p>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            @if (SignInManager.IsSignedIn(User) && item.Quantity > 0)
+                            {
+                                <a asp-action="Add" asp-controller="Cart" asp-route-id="@item.Id" class="btn btn-success">Add To Cart</a>
+                            }
+                            else if (item.Quantity == 0)
+                            {
+                                <button class="btn btn-secondary" disabled>Out of Stock</button>
+                            }
+                            <a asp-action="Details" asp-controller="Items" asp-route-id="@item.Id" class="btn btn-info">View Item</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No items found.</p>
+    }
+</div>
